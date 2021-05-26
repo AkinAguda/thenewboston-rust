@@ -1,3 +1,3 @@
 pub struct AccountBalanceResponse {
-    balance: option(u64)
+    balance: Option<u64>
 }

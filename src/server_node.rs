@@ -17,8 +17,14 @@ pub struct ServerNode<'a> {
 }
 
 impl<'a> ServerNode<'a> {
-    async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
+    pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
         let body = get(format!("{}{}", self.url, endpoint)).await;
         body
+    }
+}
+
+trait ServerNodeTrait {
+    fn greet() {
+        print!("hi")
     }
 }
