@@ -13,18 +13,38 @@ pub struct ServerNodeOptions {
 
 pub struct ServerNode<'a> {
     pub url: &'a str,
-    options: Option<ServerNodeOptions>
+    pub options: Option<ServerNodeOptions>
+}
+
+pub trait ServerNodeTrait<'a, T>  {
+    fn new(url: &'a str, options: Option<ServerNodeOptions>) -> T;
+}
+
+impl<'a> ServerNodeTrait<'a, ServerNode<'a>> for ServerNode<'a> {
+    fn new(url: &'a str, options: Option<ServerNodeOptions>) -> ServerNode<'a> {
+        ServerNode {
+            url,
+            options
+        }
+    }
 }
 
 impl<'a> ServerNode<'a> {
-    pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
+        pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
         let body = get(format!("{}{}", self.url, endpoint)).await;
         body
     }
 }
 
-trait ServerNodeTrait {
-    fn greet() {
-        print!("hi")
-    }
-}
+// impl ServerNode {
+//     pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
+//         let body = get(format!("{}{}", self.url, endpoint)).await;
+//         body
+//     }
+// }
+
+// trait ServerNodeTrait {
+//     fn greet() {
+//         print!("hi")
+//     }
+// }
