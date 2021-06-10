@@ -13,7 +13,7 @@ pub fn main() {
 
    let pv: PrimaryValidator =  PrimaryValidator::new("http://54.177.121.3", None);
 
-   let future = pv.validator.get_account_balance("431f89d714dc2d748c899b14c725a52c2b5560c2b8e2bb2bb691f41a155c3a2e");
+   let future = pv.validator.get_account_balance("10b8a9c088344001bcd2d419286ff37969fb869f2c17593b902f8fe86e690097");
 
       match block_on(future) {
       Ok(resp) => {
