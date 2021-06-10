@@ -1,15 +1,9 @@
-use reqwest::{ get, Response, Error };
+use reqwest::{ Response, Error };
 use super::server_node::{ ServerNode, ServerNodeTrait, ServerNodeOptions };
 
 pub struct Validator<'a> {
     pub server_node: ServerNode<'a>
 }
-
-// impl <'a> Validator<'a> {
-//     pub async fn getAccountBalance(&self, accountNumber: &str) ->  Result<Response, Error>{
-//         self.server_node.get_data(&format!("/accounts/{}/balance", accountNumber)).await
-//     }
-// }
 
 impl<'a> ServerNodeTrait<'a, Validator<'a>> for Validator<'a> {
     fn new(url: &'a str, options: Option<ServerNodeOptions>) -> Validator<'a> {

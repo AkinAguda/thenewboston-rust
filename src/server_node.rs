@@ -8,7 +8,7 @@ pub struct PaginationOptions {
   
 /** The options that are available for all server nodes. */
 pub struct ServerNodeOptions {
-    pub defaultPagination: PaginationOptions
+    pub default_pagination: PaginationOptions
 }
 
 pub struct ServerNode<'a> {
@@ -36,15 +36,3 @@ impl<'a> ServerNode<'a> {
     }
 }
 
-// impl ServerNode {
-//     pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
-//         let body = get(format!("{}{}", self.url, endpoint)).await;
-//         body
-//     }
-// }
-
-// trait ServerNodeTrait {
-//     fn greet() {
-//         print!("hi")
-//     }
-// }

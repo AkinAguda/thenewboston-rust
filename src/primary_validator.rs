@@ -1,6 +1,5 @@
 use super::validator::{ Validator };
-// use super::server_node::{ ServerNode };
-use super::server_node::{ ServerNode, ServerNodeTrait, ServerNodeOptions };
+use super::server_node::{ ServerNodeTrait, ServerNodeOptions };
 pub struct PrimaryValidator<'a> {
     pub validator: Validator<'a>
 }
@@ -11,6 +10,5 @@ impl<'a> ServerNodeTrait<'a, PrimaryValidator<'a>> for PrimaryValidator<'a> {
             validator: Validator::new(url, options)
         }
     }
-    // fn 
 }
 
