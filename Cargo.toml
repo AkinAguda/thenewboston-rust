@@ -8,4 +8,6 @@ edition = "2018"
 
 [dependencies]
 reqwest = "0.11.3"
+# Need to trim this down and only use relevant features in tokio
 tokio = { version = "1.6.1", features = ["full"] }
+serde = "1.0.126"
