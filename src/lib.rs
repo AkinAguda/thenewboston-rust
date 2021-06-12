@@ -1,6 +1,8 @@
 mod bank;
+mod constants;
 mod models;
 mod primary_validator;
+mod responses;
 mod server_node;
 mod validator;
 
@@ -18,16 +20,12 @@ mod tests {
 
         let bank: Bank = Bank::new("http://54.177.121.3", None);
 
-        let future = bank.get_config();
+        let future = bank.get_bank_primary_validator();
         match rt.block_on(future) {
-            Ok(resp) => {
-                let text = resp.text();
-                match rt.block_on(text) {
-                    Ok(value) => println!("{}", value),
-                    Err(error) => println!("{}", error),
-                }
+            resp => {
+                println!("{:?}", resp);
             }
-            Err(_) => {
+            (_) => {
                 println!("Errr");
             }
         };

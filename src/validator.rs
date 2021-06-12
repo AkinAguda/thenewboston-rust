@@ -14,7 +14,7 @@ impl<'a> ServerNodeTrait<'a, Validator<'a>> for Validator<'a> {
 }
 
 impl<'a> Validator<'a> {
-    pub async fn get_account_balance(&self, account_number: &str) -> Result<Response, Error> {
+    pub async fn get_account_balance(&self, account_number: &str) -> Response {
         self.server_node
             .get_data(&format!("/accounts/{}/balance", account_number))
             .await

@@ -27,8 +27,8 @@ impl<'a> ServerNodeTrait<'a, ServerNode<'a>> for ServerNode<'a> {
 }
 
 impl<'a> ServerNode<'a> {
-    pub async fn get_data(&self, endpoint: &str) -> Result<Response, Error> {
+    pub async fn get_data(&self, endpoint: &str) -> Response {
         let body = get(format!("{}{}", self.url, endpoint)).await;
-        body
+        body.expect(&format!("request to {}{} failed", self.url, endpoint))
     }
 }
