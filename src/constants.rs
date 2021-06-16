@@ -1,17 +1,21 @@
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug)]
 pub enum NodeType {
     Bank,
     ConfirmationValidator,
     PrimaryValidator,
 }
 
-pub type Hex<'a> = &'a str;
+pub type Hex = String;
 
-pub type Origin<'a> = &'a str;
+pub type Origin = String;
 
-pub type Url<'a> = &'a str;
+pub type Url = String;
 
-pub type Trust<'a> = &'a str;
+pub type Trust = String;
 
+#[derive(Deserialize, Debug)]
 pub enum Protocol {
     Http,
     Https,

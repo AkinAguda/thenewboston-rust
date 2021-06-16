@@ -1,11 +1,11 @@
 use super::server_node::{ServerNodeOptions, ServerNodeTrait};
 use super::validator::Validator;
-pub struct PrimaryValidator<'a> {
-    pub validator: Validator<'a>,
+pub struct PrimaryValidator {
+    pub validator: Validator,
 }
 
-impl<'a> ServerNodeTrait<'a, PrimaryValidator<'a>> for PrimaryValidator<'a> {
-    fn new(url: &'a str, options: Option<ServerNodeOptions>) -> PrimaryValidator<'a> {
+impl ServerNodeTrait<PrimaryValidator> for PrimaryValidator {
+    fn new(url: String, options: Option<ServerNodeOptions>) -> PrimaryValidator {
         PrimaryValidator {
             validator: Validator::new(url, options),
         }

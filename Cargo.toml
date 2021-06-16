@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = "0.11.3"
+reqwest = { version = "0.11.3", features = ["json"]}
 # Need to trim this down and only use relevant features in tokio
 tokio = { version = "1.6.1", features = ["full"] }
-serde = "1.0.126"
+serde = { version = "1.0.126", features=["derive"]}
