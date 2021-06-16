@@ -36,6 +36,7 @@ pub struct PrimaryValidatorResponseFields {
 }
 #[derive(Deserialize, Debug)]
 pub struct BankConfig {
+    // Still need to parse recieved primary validator to a PrimaryValidatorFields struct
     pub primary_validator: PrimaryValidatorResponseFields,
     pub account_number: Hex,
     pub ip_address: Origin,
