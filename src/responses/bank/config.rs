@@ -18,7 +18,6 @@ pub struct PrimaryValidatorFields {
     pub trust: Trust,
 }
 
-
 #[derive(Deserialize, Debug)]
 pub struct PrimaryValidatorResponseFields {
     pub account_number: Hex,
@@ -62,3 +61,13 @@ pub struct BankConfigResponse {
 }
 
 impl DeserializeOwned for BankConfigResponse {}
+
+pub fn convert_str_to_protocol(value: &str) -> Protocol {
+    if value == "http" {
+        Protocol::Http
+    } else if value == "https" {
+        Protocol::Http
+    } else {
+        Protocol::Http
+    }
+}

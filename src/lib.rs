@@ -13,10 +13,8 @@ mod tests {
     use bank::Bank;
     use server_node::ServerNodeTrait;
 
-    // use tokio::runtime::Runtime;
     #[tokio::test]
-    async fn it_works() {
-        // let rt = Runtime::new().unwrap();
+    async fn it_gets_account_balance() {
 
         let bank: Bank = Bank::new(String::from("http://54.177.121.3"), None);
 
@@ -24,7 +22,13 @@ mod tests {
 
         match response {
             Ok(primary_validator) => {
-                println!("SUCCESS: {:?}", primary_validator.validator.server_node.url);
+                let resp = primary_validator.validator.get_account_balance("10b8a9c088344001bcd2d419286ff37969fb869f2c17593b902f8fe86e690097").await;
+                match resp {
+                    Ok(balance_res) => {
+                        println!("{:?}", balance_res.balance);
+                    },
+                    Err(error) => println!("Error getting balance: {}", error)
+                }
             }
             Err(error) => {
                 println!("ERROR: {:?}", error);

@@ -1,9 +1,9 @@
 use super::primary_validator::PrimaryValidator;
 use super::server_node::{ServerNode, ServerNodeOptions, ServerNodeTrait};
-use reqwest::{Error, Response};
+use reqwest::Error;
 
 use super::constants::{NodeType, Protocol};
-use super::responses::bank::config::{BankConfig, BankConfigResponse};
+use super::responses::bank::config::{BankConfig, BankConfigResponse, convert_str_to_protocol};
 
 pub struct Bank {
     pub server_node: ServerNode,
@@ -30,7 +30,7 @@ impl Bank {
                     ip_address: result.ip_address,
                     node_identifier: result.node_identifier,
                     port: result.port,
-                    protocol: Protocol::Http,
+                    protocol: convert_str_to_protocol(&result.protocol),
                     version: result.version,
                     default_transaction_fee: result.default_transaction_fee,
                     node_type: NodeType::Bank,
@@ -45,13 +45,12 @@ impl Bank {
         match response {
             Ok(config) => {
                 let port = match config.port {
-                    Some(value) => value.to_string(),
+                    Some(value) => format!(":{}", value.to_string()),
                     _ => String::from(""),
                 };
                 let url = format!(
                     "{}://{}{}",
-                    // &config.primary_validator.protocol,
-                    "http",
+                    &config.primary_validator.protocol,
                     config.primary_validator.ip_address,
                     port
                 );
