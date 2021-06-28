@@ -1,9 +1,7 @@
 use super::primary_validator::PrimaryValidator;
 use super::server_node::{ServerNode, ServerNodeOptions, ServerNodeTrait};
 use reqwest::Error;
-
-use super::constants::{NodeType, Protocol};
-use super::responses::bank::config::{BankConfig, BankConfigResponse, convert_str_to_protocol};
+use super::responses::bank::config::{BankConfig};
 
 pub struct Bank {
     pub server_node: ServerNode,
@@ -19,26 +17,9 @@ impl ServerNodeTrait<Bank> for Bank {
 
 impl Bank {
     pub async fn get_config(self) -> Result<BankConfig, Error> {
-        let response: Result<BankConfigResponse, Error> =
+        let response: Result<BankConfig, Error> =
             self.server_node.get_data("/config").await;
-
-        match response {
-            Ok(result) => {
-                let bank_config = BankConfig {
-                    primary_validator: result.primary_validator,
-                    account_number: result.account_number,
-                    ip_address: result.ip_address,
-                    node_identifier: result.node_identifier,
-                    port: result.port,
-                    protocol: convert_str_to_protocol(&result.protocol),
-                    version: result.version,
-                    default_transaction_fee: result.default_transaction_fee,
-                    node_type: NodeType::Bank,
-                };
-                Ok(bank_config)
-            }
-            Err(error) => Err(error),
-        }
+        response
     }
     pub async fn get_bank_primary_validator(self) -> Result<PrimaryValidator, Error> {
         let response = self.get_config().await;
@@ -50,7 +31,7 @@ impl Bank {
                 };
                 let url = format!(
                     "{}://{}{}",
-                    &config.primary_validator.protocol,
+                    &config.primary_validator.protocol.get_str(),
                     config.primary_validator.ip_address,
                     port
                 );
