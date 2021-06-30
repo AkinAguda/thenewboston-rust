@@ -33,13 +33,3 @@ pub struct BankConfig {
 }
 
 impl DeserializeOwned for BankConfig {}
-
-pub fn convert_str_to_protocol(value: &str) -> Protocol {
-    if value == "http" {
-        Protocol::Http
-    } else if value == "https" {
-        Protocol::Http
-    } else {
-        Protocol::Http
-    }
-}
