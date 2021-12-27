@@ -2,7 +2,9 @@ use reqwest::{Error, Response};
 
 use super::server_node::{ServerNode, ServerNodeOptions, ServerNodeTrait};
 
-use super::responses::generic::account_balance::{AccountBalanceResponse};
+use super::responses::generic::account_balance::{
+    AccountBalanceLockResponse, AccountBalanceResponse,
+};
 
 pub struct Validator {
     pub server_node: ServerNode,
@@ -24,6 +26,17 @@ impl Validator {
         let response: Result<AccountBalanceResponse, Error> = self
             .server_node
             .get_data(&format!("/accounts/{}/balance", account_number))
+            .await;
+        response
+    }
+
+    pub async fn get_account_balance_lock(
+        &self,
+        account_number: &str,
+    ) -> Result<AccountBalanceLockResponse, Error> {
+        let response: Result<AccountBalanceLockResponse, Error> = self
+            .server_node
+            .get_data(&format!("/accounts/{}/balance_lock", account_number))
             .await;
         response
     }

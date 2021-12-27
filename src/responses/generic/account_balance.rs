@@ -8,3 +8,10 @@ pub struct AccountBalanceResponse {
 }
 
 impl DeserializeOwned for AccountBalanceResponse {}
+
+#[derive(Deserialize, Debug)]
+pub struct AccountBalanceLockResponse {
+    pub balance_lock: String,
+}
+
+impl DeserializeOwned for AccountBalanceLockResponse {}
